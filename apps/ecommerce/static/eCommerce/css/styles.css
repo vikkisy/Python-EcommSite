@@ -1,0 +1,211 @@
+img{
+  width: 200px;
+  display: inline-block:
+}
+
+.images{
+  display: inline-block;
+  width: 45%;
+  margin-bottom: 1em;
+  padding: 1em;
+  margin-right: 3em;
+}
+
+.images p{
+  display: block;
+  text-align: center;
+  font-size: 110%
+}
+
+.images span{
+  margin-left: 5em;
+}
+
+.homesidebar{
+  display: inline-block;
+  width: 15%;
+  border: 1px silver solid;
+  margin-top: 1em;
+  padding: .5em;
+  vertical-align: top;
+}
+#search_name {
+  width: 150px;
+}
+.mainbody{
+  display: inline-block;
+  width: 85%;
+}
+
+.header h3{
+  display: inline-block;
+}
+
+.header a{
+  float: right;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+.header{
+  background-color: #2D2D2D;
+  color: white;
+  padding: 5px;
+}
+.cart{
+  display: inline-block;
+  margin-left: 1200px;
+  width: 100px;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+.btn-primary{
+    border-radius: 50%;
+}
+
+.mainbody{
+  display: inline-block;
+  width: 80%;
+  margin-left: 2em;
+}
+
+.one_item,
+.one_add{
+  display: inline-block;
+  width: 45%;
+}
+
+.one_add{
+  text-align: right;
+  vertical-align: bottom;
+}
+.one_add p{
+  margin-bottom: 45%;
+}
+
+.similiar img{
+  width: 15%;
+}
+
+.page{
+  text-align: center;
+  font-size: 150%;
+}
+
+.searchpages{
+  text-align: right;
+  display: inline-block;
+}
+
+.sortby{
+  float: right;
+  display: inline-block;
+}
+
+.stuff h2{
+  display: inline-block;
+}
+
+input{
+  text-decoration: none;
+}
+
+.sortbymain{
+  display: block;
+  text-align: right;
+  margin-top: 2em;
+}
+
+.sortbymain_main{
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+}
+
+.logout{
+  float: right;
+  color: white;
+}
+
+.admin_header{
+  background-color: #990000;
+  height: 10%;
+  padding: 1em;
+}
+.admin_header h3{
+  color: white;
+  display: inline;
+  font-size: 300%;
+  margin-right: 50px;
+}
+
+.admin_header .link{
+  color: white;
+  font-size: 200%;
+  margin-right: 2em;
+}
+
+
+.adminheadertop{
+  margin-top: 1em;
+  display: inline-block;
+}
+
+.adminheadertop1{
+  text-align: right;
+}
+
+.allproducts img{
+  width: 50px;
+}
+
+.allproducts td,
+.allproducts th{
+  text-align: center;
+}
+
+.column{
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+}
+
+.column label{
+
+}
+
+.column input{
+  display:block;
+}
+
+#infopay{
+  text-align: center;
+  border-radius: 5px;
+  display: block;
+}
+
+.add_product label{
+  display: block;
+li{
+  list-style-type: none;
+}
+.order_table {
+  width: 850px;
+  display: inline-block;
+}
+.left_content {
+  display: inline-block;
+  width: 800px;
+  vertical-align: top;
+  margin: 25px;
+}
+.order_sidebar{
+  display: inline-block;
+  border: 1px solid black;
+  margin-top: 25px;
+  padding: 15px;
+}
+.order_sidebar h5{
+  font-weight: bold;
+}

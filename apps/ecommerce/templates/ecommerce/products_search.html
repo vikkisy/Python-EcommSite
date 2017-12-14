@@ -1,0 +1,35 @@
+    <table class="table">
+      <thead>
+        <tr>
+        <th>Picture</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Inventory Count</th>
+        <th>Quantity sold</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><img src="static/ecommerce/img/{{item.image}}" alt=""></td>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.popularity}}</td>
+        <td>
+          <form action="/edit" method="post" id="item_edit_form">
+          {% csrf_token %}
+          <input type="hidden" name="id" value="{{item.id}}">
+          <input type="submit" class="but btn-link" value="edit">
+        </form>
+        <form action="/delete" method="post" id="item_delete_form">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{item.id}}">
+        <input type="submit" class="but btn-link" value="delete">
+        </form>
+        </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>

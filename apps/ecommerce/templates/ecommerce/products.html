@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Products</title>
+    {% load static %}
+    {% load el_pagination_tags %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+    <script type="text/javascript" src="{% static 'ecommerce/js/scripts.js' %}"></script>
+  </head>
+  <body>
+    <div class=container>
+      <div class=admin_header>
+        <h3>Dashboard</h3>
+        <a class=link href="/orders">Orders</a>
+        <a class=link href="/products">Products</a>
+        <a class="logout" href='/logout'>Log off</a>
+      </div>
+
+      <div class="adminheadertop">
+        <form action="/adminsearch" method="post" id="form_adminsearch">
+        {% csrf_token %}
+        <input type="text" placeholder="Search "name="adminsearch" id="adminsearch_name">
+        </form>
+      </div>
+
+
+      <div class="adminheadertop1">
+        <a href="/addproduct"> Add a Product</a>
+      </div>
+
+        <div class="allproducts">
+          <div class="infohere">
+            <table class="table">
+              <thead>
+                <tr>
+                <th>Picture</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Inventory Count</th>
+                <th>Quantity sold</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% paginate 6 items %}{% get_pages %}
+              {% for item in items %}
+              <tr>
+                <td><img src="static/ecommerce/img/{{item.image}}" alt=""></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.popularity}}</td>
+                <td>
+                  <form action="/edit" method="post" id="item_edit_form">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{item.id}}">
+                  <input type="submit" class="but btn-link" value="edit">
+                </form>
+                <form action="/delete" method="post" id="item_delete_form">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{item.id}}">
+                <input type="submit" class="but btn-link" value="delete">
+                </form>
+                </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="page">{{ pages }}</div>
+      </div>
+    </div>
+  </body>
+</html>

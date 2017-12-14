@@ -1,0 +1,14 @@
+<h1>Edit Product - ID NUMBER</h1>
+  <form action="/edit" method='post' class="edit_post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="">
+    <div class="comment">
+    <div style="border:1px solid silver; width: 200px; height:300px">
+      <p>{{post.post}}</p>
+    </div>
+    <input style="display: none; border:1px solid silver; width: 200px; height:300px" type="textarea" name="comments" value="Enter description here...">
+    </div>
+  </form>
+
+
+  

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+    {% load static %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+  </head>
+    <body>
+      <div class=container>
+        <div>
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+
+        <h1> Welcome to World Domination!</h1>
+        <p> Domination only a burrito away! </p>
+        <h3> How Can We Help You Dominate Today? </h3>
+        <div class=login>
+          <form action="/login" method="post">
+            <fieldset>
+              <legend>Login</legend>
+              {% csrf_token %}
+              <label>Email: <input type="text" name="email"></label>
+              <label>Password: <input type="password" name="password"></label>
+              <input type="hidden" name="route" value="login">
+              <input type="submit" value="Login">
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </body>
+</html>

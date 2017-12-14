@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ITEMS}}</title>
+    {% load static %}
+    {% load mathfilters %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+  </head>
+  <body>
+    <div class='container'>
+      <div class="header">
+        <h3>A Web Page Store</h3>
+        {% if request.session.cart %}
+        <a href="/cart">Shopping Cart {{count}}</a>
+        {% endif %}
+      </div>
+      <div class="one_body">
+        <div class=one_item>
+          <a href="/">Go Back</a>
+          <h1>{{item.name}}</h1>
+          <img src="../static/ecommerce/img/{{item.image}}" alt="">
+        </div>
+        <div class=one_add>
+          <p>{{item.desc}}</p>
+          <form action="/addcart" method = "post">
+            {% csrf_token %}
+            <select name="quantity_added">
+                <option value="1">1 $({{item.price}})</option>
+                <option value="2">2 $({{item.price|mul:2}})</option>
+                <option value="3">3 $({{item.price|mul:3}})</option>
+            </select>
+            <input type="hidden" name="item_id" value="{{item.id}}">
+            <input type="submit" value="Buy" class="btn-primary">
+          </form>
+        </div>
+
+        <div class='similiar'>
+          <h2>Similiar Items</h2>
+          {% for items in all_items %}
+          <a href="/show/{{items.id}}"><img src="../static/ecommerce/img/{{items.image}}" alt=""></a>
+          {% endfor %}
+        </div>
+
+      </div>
+
+
+    </div>
+  </body>
+</html>

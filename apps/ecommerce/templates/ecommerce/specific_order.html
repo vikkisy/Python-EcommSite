@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Order</title>
+    {% load static %}
+    {% load mathfilters %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+  </head>
+  <body>
+    <div class=container>
+      <div class=admin_header>
+        <h3>Dashboard</h3>
+        <a class=link href="/orders">Orders</a>
+        <a class=link href="/products">Products</a>
+        <a class="logout" href='/logout'>Log off</a>
+      </div>
+      <div class="adminheadertop">
+        <form action="/adminsearch" method="post" id="form_adminpost">
+        {% csrf_token %}
+
+        </form>
+      </div>
+        <div class="order_sidebar">
+          <ul>
+            <li><h5>Order ID: {{ order_details.id }}</h5></li>
+            <p><li><h5>Customer shipping info:</h5></li></p>
+            <li>Name: {{ order_details.shipping.first_name }} {{ order_details.shipping.last_name }}</li>
+            <li>Address: {{ order_details.shipping.address }} {{ orders.shipping.address2 }}</li>
+            <li>City: {{ order_details.shipping.city }}</li>
+            <li>State: {{ order_details.shipping.state }}</li>
+            <li>Zip: {{ order_details.shipping.zipcode }}</li>
+
+            <p><li><h5>Customer billing info:</h5></li></p>
+            <li>Name: {{ order_details.billing.first_name }} {{ order_details.billing.last_name }}</li>
+            <li>Address: {{  order_details.billing.address }} {{  order_details.billing.address2 }}</li>
+            <li>City: {{  order_details.billing.city }}</li>
+            <li>State: {{  order_details.billing.state }}</li>
+            <li>Zip: {{  order_details.billing.zipcode }}</li>
+          </ul>
+
+        </div>
+        <div class ="left_content">
+          <div class="order_table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for name in item %}
+              <tr>
+                <td>{{ name.id }}</td>
+                <td>{{name.name}}</td>
+                <td>${{ name.price }}</td></td>
+                {% for id in cart %}
+                {% if id.cart_items__item__id == name.id %}
+                <td>{{id.cart_items__quantity__count}}</td>
+                <td>${{id.cart_items__quantity__count|mul:name.price}}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          Status
+        </div>
+        <div>
+          SUBTOTAL
+          SHIPPING
+          TOTAL
+        </div>
+        </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ORDERS</title>
+    {% load static %}
+    {% load mathfilters %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+  </head>
+  <body>
+    <div class=container>
+      <div class=admin_header>
+        <h3>Dashboard</h3>
+        <a class=link href="/orders">Orders</a>
+        <a class=link href="/products">Products</a>
+        <a class="logout" href='/logout'>Log off</a>
+      </div>
+
+      <div class="infohere">
+        <div class="adminheadertop">
+          <form action="/adminsearch" method="post" id="form_adminpost">
+          {% csrf_token %}
+          <input type="text" placeholder="Search "name="ordersearch" id="order_search_name">
+          </form>
+        </div>
+
+        <div class="adminheadertop1">
+          <form action="/sortby_status" method='post' id="sortby_status">
+            {% csrf_token %}
+            <select name="status" id=status>
+                <option value="Show">Show All</option>
+                <option value="In Progress">Order in Process</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+          </form>
+        </div>
+
+
+        <table class="table">
+          <thead>
+
+            <tr>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Billing Address</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            {% for orders in order_details %}
+            <tr>
+              <td><a href="/show_order/{{ orders.id }}">{{ orders.id }}</a></td>
+              <td>{{ orders.billing.first_name }} {{ orders.billing.last_name }}</td>
+              <td>{{ orders.created_at }}</td>
+              <td>{{ orders.billing.address }} {{ orders.billing.address2 }} {{ orders.billing.city }} {{ orders.billing.state }} {{ orders.billing.zipcode }}</td>
+              <td>$total</td>
+              <td>
+                <select class="" name="status">
+                  <option value="inprogress">IN PROGRESS</option>
+                  <option value="shipped">SHIPPED</option>
+                  <option value="cancel">CANCELLED</option>
+                </select>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </body>
+</html>

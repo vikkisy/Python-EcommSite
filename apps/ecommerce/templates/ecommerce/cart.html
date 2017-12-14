@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BUY NOW I"M HUNGRY</title>
+    {% load static %}
+    {% load mathfilters %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+  </head>
+  <body>
+    <div class=container>
+      <div class="header">
+        <h3>A Web Page Store</h3>
+        {% if request.session.cart %}
+        <a href="/cart">Shopping Cart {{count}}</a>
+        {% endif %}
+      </div>
+      <table class=table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for name in item %}
+          <tr>
+            <td>{{name.name}}</td>
+            <td>${{ name.price }}</td></td>
+            {% for id in cart %}
+            {% if id.cart_items__item__id == name.id %}
+            <td>{{id.cart_items__quantity__count}}</td>
+            <td>${{id.cart_items__quantity__count|mul:name.price}}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+
+        </tbody>
+      </table>
+      {{total}}
+      <a href="/"> Continue Shopping</a>
+      <hr />
+      <div class=info>
+        <form action="/process" method=post>
+          {% csrf_token %}
+          <fieldset>
+            <div class=column>
+              <h2>Shipping Info</h2>
+              <label>First Name: <input type='text' name='first_name'></label>
+              <label>Last Name: <input type='text' name='last_name'></label>
+              <label>Address: <input type='text' name='address'></label>
+              <label>Address 2: <input type='text' name='address2'></label>
+              <label>City : <input type='text' name='city'></label>
+              <label>State : <input type='text' name='state'></label>
+              <label>Zipcode : <input type='text' name='zipcode'></label>
+            </div>
+            <div class=column>
+              <h2>Billing Info</h2>
+              <label>Check if same as shipping</labe><input type='checkbox'></label><br>
+              <label>First Name: <input type='text' name='bfirst_name'></label>
+              <label>Last Name: <input type='text' name='blast_name'></label>
+              <label>Address: <input type='text' name='baddress'></label>
+              <label>Address 2: <input type='text' name='baddress2'></label>
+              <label>City : <input type='text' name='bcity'></label>
+              <label>State : <input type='text' name='bstate'></label>
+              <label>Zipcode : <input type='text' name='bzipcode'></label>
+              <label>Card: <input type="text" name="ccard"></label>
+              <label>Security: <input type="text" name="security"></label>
+              <label>Expiration: <input type="text" value="(mm)" name="month"><input type="text" value="(year)" name="year"></label>
+            </div>
+            <input class = "btn btn-primary" id="infopay" type=submit name="Pay">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

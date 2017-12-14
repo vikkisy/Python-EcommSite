@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>An Ecommerce Shop</title>
+    {% load static %}
+    {% load el_pagination_tags %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'eCommerce/css/styles.css' %}">
+    <script type="text/javascript" src="{% static 'ecommerce/js/scripts.js' %}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3>An Ecommerce Shop</h3>
+        {% if request.session.cart %}
+        <a href="/cart">Shopping Cart {{count}}</a>
+        {% endif %}
+      </div>
+
+      <div class='homesidebar'>
+        <form action='/search' method='post' id="search_bar">
+          {% csrf_token %}
+          <input type="text" placeholder="search product name "name="search" id="search_name">
+        </form>
+        <h4>Categories</h4>
+        {% for categories in category %}
+        <form action='/searchcat' method='post' id="search_bar_cat">
+          {% csrf_token %}
+          <input type="hidden" name="category" value="{{categories.category}}">
+          <input type="submit" class="btn btn-link" value="{{categories.category}}">({{categories.count}})
+        </form>
+        {% endfor %}
+      </div>
+      <div class="mainbody">
+        <div class=sortbymain_main>
+          <p>Sorted By:</p>
+          <form action="/sortby" method='post' id="sortby">
+            {% csrf_token %}
+            <select name="sorted" id=sorted>
+                <option value="price">Price</option>
+                <option value="popularity">Most Popular</option>
+            </select>
+          </form>
+        </div>
+            {% paginate 6 items %}{% get_pages %}
+        <div id="allitems">
+            {% for item in items %}
+            <div class="images">
+            <a href="/show/{{item.id}}"><img src="static/ecommerce/img/{{item.image}}" alt=""></a>
+            <p>{{item.name}} <span>Price ${{item.price}}</span><p>
+            </div>
+            {% endfor %}
+        </div>
+          <div class="page">{{ pages }}</div>
+      </div>
+  </body>
+</html>
