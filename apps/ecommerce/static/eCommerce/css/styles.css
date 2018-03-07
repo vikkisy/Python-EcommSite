@@ -1,25 +1,26 @@
-img{
-  width: 200px;
-  display: inline-block:
-}
-
 .images{
   display: inline-block;
-  width: 45%;
+  width: 25%;
   margin-bottom: 1em;
   padding: 1em;
   margin-right: 3em;
+  text-align: center;
 }
 
-.images p{
+img{
+  width: 100%;
+  display: inline-block:
+}
+
+/* .images p{
   display: block;
   text-align: center;
   font-size: 110%
-}
+} */
 
-.images span{
+/* .images span{
   margin-left: 5em;
-}
+} */
 
 .homesidebar{
   display: inline-block;

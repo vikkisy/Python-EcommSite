@@ -15,6 +15,8 @@
   </head>
   <body>
     <div class="container">
+
+      <!-- Header -->
       <div class="header">
         <h3>An Ecommerce Shop</h3>
         {% if request.session.cart %}
@@ -22,6 +24,7 @@
         {% endif %}
       </div>
 
+      <!-- Side Nav -->
       <div class='homesidebar'>
         <form action='/search' method='post' id="search_bar">
           {% csrf_token %}
@@ -36,6 +39,8 @@
         </form>
         {% endfor %}
       </div>
+
+      <!-- Products -->
       <div class="mainbody">
         <div class=sortbymain_main>
           <p>Sorted By:</p>
@@ -51,12 +56,16 @@
         <div id="allitems">
             {% for item in items %}
             <div class="images">
-            <a href="/show/{{item.id}}"><img src="static/ecommerce/img/{{item.image}}" alt=""></a>
-            <p>{{item.name}} <span>Price ${{item.price}}</span><p>
+            <a href="/show/{{item.id}}">
+              <img src="static/ecommerce/img/{{item.image}}" alt="">
+            </a>
+            <p>{{item.name}}</p>
+            <p>Price ${{item.price}}<p>
             </div>
             {% endfor %}
         </div>
           <div class="page">{{ pages }}</div>
       </div>
+
   </body>
 </html>
